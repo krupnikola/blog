@@ -10,5 +10,5 @@ class Config(object):
 	# URL that defines type and location of the database, napravili smo apsolutnu putanju do baze
 	# opet smo ostavili mogucnost da ako postoji environ variable koaj sadrzi DATABASE_URL da to uzmemo
 	SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or \
-		'sqlite:///' + os.path.join(basedir, 'app1.db')
+		'sqlite:///' + os.path.join(basedir, 'app.db')
 	SQLALCHEMY_TRACK_MODIFICATIONS = False
