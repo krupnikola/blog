@@ -20,7 +20,7 @@ login.login_view = 'login'
 
 # first check that we ar enot in debug mode
 if not app.debug:
-	#second check if the email server is configured, if not we can not send emails
+    # second check if the email server is configured, if not we can not send emails
     if app.config['MAIL_SERVER']:
         auth = None
         if app.config['MAIL_USERNAME'] or app.config['MAIL_PASSWORD']:
@@ -28,7 +28,7 @@ if not app.debug:
         secure = None
         if app.config['MAIL_USE_TLS']:
             secure = ()
-        #making a new file handler that logs messages to an email 
+        # making a new file handler that logs messages to an email
         mail_handler = SMTPHandler(
             mailhost=(app.config['MAIL_SERVER'], app.config['MAIL_PORT']),
             # fake "from" mail address for sending emails
