@@ -56,11 +56,11 @@ class User(UserMixin, db.Model):
 
     # list of posts that user is following
     def followed_posts(self):
-        # posts by followed users are stored in the variable
+        # posts table and followers table are joined to display only posts from followed users
         followed = Post.query.join(
             followers, followers.c.followed_id == Post.user_id).filter(
                 followers.c.follower_id == self.id)
-            # posts from users that user is following are combined with user-own posts and displayed together - SQL UNION statement
+        # posts from users that user is following are combined with user-own posts and displayed together - SQL UNION statement
         return followed.union(self.posts).order_by(Post.timestamp.desc())
 
 

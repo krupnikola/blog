@@ -13,7 +13,7 @@ class Config(object):
 		'sqlite:///' + os.path.join(basedir, 'app.db')
 	SQLALCHEMY_TRACK_MODIFICATIONS = False
 	# ispisuje query-je onako kako ih sqlalchemy salje bazi interno
-	SQLALCHEMY_ECHO = True
+	# SQLALCHEMY_ECHO = True
 
 	# email notification configuration
 	MAIL_SERVER = os.environ.get('MAIL_SERVER')
@@ -23,3 +23,6 @@ class Config(object):
 	MAIL_USERNAME = os.environ.get("MAIL_USERNAME")
 	MAIL_PASSWORD = os.environ.get("MAIL_PASSWORD")
 	ADMINS = ['etfnik@gmail.com']
+
+	# pagination setting
+	POSTS_PER_PAGE = 10
