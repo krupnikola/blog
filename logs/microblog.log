@@ -46,3 +46,4 @@ Traceback (most recent call last):
     return getattr(obj, attribute)
 jinja2.exceptions.UndefinedError: 'app1.models.User object' has no attribute 'followed'
 2018-05-15 16:31:09,714 INFO: Microblog startup [in /home/krupni/microblog/app1/__init__.py:67]
+2018-05-15 17:44:43,948 INFO: Microblog startup [in /home/krupni/microblog/app1/__init__.py:70]

@@ -8,6 +8,7 @@ import logging
 from logging.handlers import SMTPHandler, RotatingFileHandler
 import os
 from flask_bootstrap import Bootstrap
+from flask_moment import Moment
 
 
 
@@ -21,6 +22,8 @@ mail = Mail(app)
 login.login_view = 'login'
 # bootstrap support integration
 bootstrap = Bootstrap(app)
+# integration of Moment.js functionalities
+moment = Moment(app)
 
 
 # email setup 

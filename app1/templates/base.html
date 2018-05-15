@@ -75,3 +75,9 @@
         {% endblock %}
     </div>
 {% endblock %}
+
+{% block scripts %}
+    {{ super() }}
+    {# this line includes moment.js javascript library in the template #}
+    {{ moment.include_moment() }}
+{% endblock %}
