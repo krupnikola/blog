@@ -1,8 +1,4 @@
-2018-05-04 16:03:39,900 INFO: Microblog startup [in /home/krupni/microblog/app1/__init__.py:61]
-2018-05-04 16:05:19,373 INFO: Microblog startup [in /home/krupni/microblog/app1/__init__.py:60]
-2018-05-04 19:06:34,144 INFO: Microblog startup [in /home/krupni/microblog/app1/__init__.py:60]
-2018-05-04 19:07:00,580 INFO: Microblog startup [in /home/krupni/microblog/app1/__init__.py:60]
-2018-05-04 19:07:14,781 ERROR: Exception on /edit_profile [POST] [in /home/krupni/microblog/venv/lib64/python3.5/site-packages/flask/app.py:1560]
+2018-05-09 11:04:05,236 ERROR: Exception on / [POST] [in /home/krupni/microblog/venv/lib64/python3.5/site-packages/flask/app.py:1560]
 Traceback (most recent call last):
   File "/home/krupni/microblog/venv/lib64/python3.5/site-packages/flask/app.py", line 1982, in wsgi_app
     response = self.full_dispatch_request()
@@ -18,7 +14,7 @@ Traceback (most recent call last):
     return self.view_functions[rule.endpoint](**req.view_args)
   File "/home/krupni/microblog/venv/lib64/python3.5/site-packages/flask_login/utils.py", line 261, in decorated_view
     return func(*args, **kwargs)
-  File "/home/krupni/microblog/app1/routes.py", line 101, in edit_profile
+  File "/home/krupni/microblog/app1/routes.py", line 24, in index
     if form.validate_on_submit():
   File "/home/krupni/microblog/venv/lib64/python3.5/site-packages/flask_wtf/form.py", line 101, in validate_on_submit
     return self.is_submitted() and self.validate()
@@ -30,10 +26,9 @@ Traceback (most recent call last):
     stop_validation = self._run_validation_chain(form, chain)
   File "/home/krupni/microblog/venv/lib64/python3.5/site-packages/wtforms/fields/core.py", line 224, in _run_validation_chain
     validator(form, self)
-  File "/home/krupni/microblog/app1/forms.py", line 48, in validate_username
-    if username.data != original_username:
-NameError: name 'original_username' is not defined
-2018-05-04 19:08:17,504 ERROR: Exception on /edit_profile [POST] [in /home/krupni/microblog/venv/lib64/python3.5/site-packages/flask/app.py:1560]
+TypeError: __init__() takes from 1 to 2 positional arguments but 3 were given
+2018-05-09 11:04:58,988 INFO: Microblog startup [in /home/krupni/microblog/app1/__init__.py:60]
+2018-05-09 11:05:10,599 ERROR: Exception on / [POST] [in /home/krupni/microblog/venv/lib64/python3.5/site-packages/flask/app.py:1560]
 Traceback (most recent call last):
   File "/home/krupni/microblog/venv/lib64/python3.5/site-packages/flask/app.py", line 1982, in wsgi_app
     response = self.full_dispatch_request()
@@ -49,7 +44,7 @@ Traceback (most recent call last):
     return self.view_functions[rule.endpoint](**req.view_args)
   File "/home/krupni/microblog/venv/lib64/python3.5/site-packages/flask_login/utils.py", line 261, in decorated_view
     return func(*args, **kwargs)
-  File "/home/krupni/microblog/app1/routes.py", line 101, in edit_profile
+  File "/home/krupni/microblog/app1/routes.py", line 24, in index
     if form.validate_on_submit():
   File "/home/krupni/microblog/venv/lib64/python3.5/site-packages/flask_wtf/form.py", line 101, in validate_on_submit
     return self.is_submitted() and self.validate()
@@ -61,10 +56,9 @@ Traceback (most recent call last):
     stop_validation = self._run_validation_chain(form, chain)
   File "/home/krupni/microblog/venv/lib64/python3.5/site-packages/wtforms/fields/core.py", line 224, in _run_validation_chain
     validator(form, self)
-  File "/home/krupni/microblog/app1/forms.py", line 48, in validate_username
-    if username.data != original_username:
-NameError: name 'original_username' is not defined
-2018-05-04 19:09:16,168 ERROR: Exception on /edit_profile [POST] [in /home/krupni/microblog/venv/lib64/python3.5/site-packages/flask/app.py:1560]
+TypeError: __init__() takes from 1 to 2 positional arguments but 3 were given
+2018-05-09 11:06:04,866 INFO: Microblog startup [in /home/krupni/microblog/app1/__init__.py:60]
+2018-05-09 11:06:15,931 ERROR: Exception on / [POST] [in /home/krupni/microblog/venv/lib64/python3.5/site-packages/flask/app.py:1560]
 Traceback (most recent call last):
   File "/home/krupni/microblog/venv/lib64/python3.5/site-packages/flask/app.py", line 1982, in wsgi_app
     response = self.full_dispatch_request()
@@ -80,7 +74,7 @@ Traceback (most recent call last):
     return self.view_functions[rule.endpoint](**req.view_args)
   File "/home/krupni/microblog/venv/lib64/python3.5/site-packages/flask_login/utils.py", line 261, in decorated_view
     return func(*args, **kwargs)
-  File "/home/krupni/microblog/app1/routes.py", line 101, in edit_profile
+  File "/home/krupni/microblog/app1/routes.py", line 24, in index
     if form.validate_on_submit():
   File "/home/krupni/microblog/venv/lib64/python3.5/site-packages/flask_wtf/form.py", line 101, in validate_on_submit
     return self.is_submitted() and self.validate()
@@ -92,11 +86,9 @@ Traceback (most recent call last):
     stop_validation = self._run_validation_chain(form, chain)
   File "/home/krupni/microblog/venv/lib64/python3.5/site-packages/wtforms/fields/core.py", line 224, in _run_validation_chain
     validator(form, self)
-  File "/home/krupni/microblog/app1/forms.py", line 48, in validate_username
-    if username.data != original_username:
-NameError: name 'original_username' is not defined
-2018-05-04 19:09:35,585 INFO: Microblog startup [in /home/krupni/microblog/app1/__init__.py:60]
-2018-05-04 19:09:42,595 ERROR: Exception on /edit_profile [POST] [in /home/krupni/microblog/venv/lib64/python3.5/site-packages/flask/app.py:1560]
+TypeError: __init__() takes from 1 to 2 positional arguments but 3 were given
+2018-05-09 11:10:52,888 INFO: Microblog startup [in /home/krupni/microblog/app1/__init__.py:60]
+2018-05-09 11:11:06,663 ERROR: Exception on / [POST] [in /home/krupni/microblog/venv/lib64/python3.5/site-packages/flask/app.py:1560]
 Traceback (most recent call last):
   File "/home/krupni/microblog/venv/lib64/python3.5/site-packages/flask/app.py", line 1982, in wsgi_app
     response = self.full_dispatch_request()
@@ -112,7 +104,7 @@ Traceback (most recent call last):
     return self.view_functions[rule.endpoint](**req.view_args)
   File "/home/krupni/microblog/venv/lib64/python3.5/site-packages/flask_login/utils.py", line 261, in decorated_view
     return func(*args, **kwargs)
-  File "/home/krupni/microblog/app1/routes.py", line 101, in edit_profile
+  File "/home/krupni/microblog/app1/routes.py", line 24, in index
     if form.validate_on_submit():
   File "/home/krupni/microblog/venv/lib64/python3.5/site-packages/flask_wtf/form.py", line 101, in validate_on_submit
     return self.is_submitted() and self.validate()
@@ -124,6 +116,6 @@ Traceback (most recent call last):
     stop_validation = self._run_validation_chain(form, chain)
   File "/home/krupni/microblog/venv/lib64/python3.5/site-packages/wtforms/fields/core.py", line 224, in _run_validation_chain
     validator(form, self)
-  File "/home/krupni/microblog/app1/forms.py", line 48, in validate_username
-    if username.data != original_username:
-NameError: name 'original_username' is not defined
+TypeError: __init__() takes from 1 to 2 positional arguments but 3 were given
+2018-05-09 11:22:52,213 INFO: Microblog startup [in /home/krupni/microblog/app1/__init__.py:60]
+2018-05-09 11:28:06,644 INFO: Microblog startup [in /home/krupni/microblog/app1/__init__.py:60]

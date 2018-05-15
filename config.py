@@ -22,7 +22,7 @@ class Config(object):
 	MAIL_USE_TLS = os.environ.get('MAIL_USE_TLS') is not None
 	MAIL_USERNAME = os.environ.get("MAIL_USERNAME")
 	MAIL_PASSWORD = os.environ.get("MAIL_PASSWORD")
-	ADMINS = ['etfnik@gmail.com']
+	ADMINS = ['nikola@example.com']
 
 	# pagination setting
 	POSTS_PER_PAGE = 10

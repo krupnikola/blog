@@ -1,9 +1,10 @@
-from app1 import db, login
+from app1 import db, login, app
 from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 from hashlib import md5
-
+import jwt
+from time import time
 
 # not a model class table since we'll not use it directly but through SQLAlchemy
 # to get the foreign keys
@@ -62,6 +63,30 @@ class User(UserMixin, db.Model):
                 followers.c.follower_id == self.id)
         # posts from users that user is following are combined with user-own posts and displayed together - SQL UNION statement
         return followed.union(self.posts).order_by(Post.timestamp.desc())
+
+    # generates token for password reset when called for a particullar user
+    # we define the fields in the token in form of a dictionary
+    def get_reset_password_token(self, expires_in=600):
+        return jwt.encode({'reset_password': self.id, 'exp': time() + expires_in},
+            # adds .decode at the end because token encoder returns byte string and
+            # we want normal string to work with 
+            app.config['SECRET_KEY'], algorithm='HS256').decode('utf-8')
+
+    # verifies the received token
+    # made it as a static method because user is unknown in this moment so this method can not be called on 
+    # a user object
+    @staticmethod
+    def verify_reset_password_token(token):
+        try:
+            # we are taking the id of the user from the dictionary under the key ['reset_password']
+            # that is returned from token if the token iz validated
+            id = jwt.decode(token, app.config['SECRET_KEY'],
+                            algorithms=['HS256'])['reset_password']
+        except:
+            # returning none just not to break the app if the user is unknown
+            return None
+        # getting the user object back as a return value based on user.ID
+        return User.query.get(id)
 
 
 @login.user_loader
