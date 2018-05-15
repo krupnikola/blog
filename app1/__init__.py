@@ -7,6 +7,7 @@ from flask_mail import Mail
 import logging
 from logging.handlers import SMTPHandler, RotatingFileHandler
 import os
+from flask_bootstrap import Bootstrap
 
 
 
@@ -18,6 +19,8 @@ login = LoginManager(app)
 mail = Mail(app)
 # protection of login required views, here is specified what route to trigger if user is not authenticated
 login.login_view = 'login'
+# bootstrap support integration
+bootstrap = Bootstrap(app)
 
 
 # email setup 
