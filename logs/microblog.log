@@ -47,3 +47,73 @@ Traceback (most recent call last):
 jinja2.exceptions.UndefinedError: 'app1.models.User object' has no attribute 'followed'
 2018-05-15 16:31:09,714 INFO: Microblog startup [in /home/krupni/microblog/app1/__init__.py:67]
 2018-05-15 17:44:43,948 INFO: Microblog startup [in /home/krupni/microblog/app1/__init__.py:70]
+2018-05-16 16:55:25,414 INFO: Microblog startup [in /home/krupni/microblog/app1/__init__.py:70]
+2018-05-17 17:39:16,726 INFO: Microblog startup [in /home/krupni/microblog/app1/__init__.py:74]
+2018-05-17 19:07:29,848 INFO: Microblog startup [in /home/krupni/microblog/app1/__init__.py:74]
+2018-05-17 19:14:51,190 INFO: Microblog startup [in /home/krupni/microblog/app1/__init__.py:74]
+2018-05-21 12:36:40,869 INFO: Microblog startup [in /home/krupni/microblog/app1/__init__.py:74]
+2018-05-21 12:44:00,918 INFO: Microblog startup [in /home/krupni/microblog/app1/__init__.py:74]
+2018-05-21 12:44:21,505 INFO: Microblog startup [in /home/krupni/microblog/app1/__init__.py:74]
+2018-05-21 12:44:35,714 INFO: Microblog startup [in /home/krupni/microblog/app1/__init__.py:74]
+2018-05-21 14:12:59,613 INFO: Microblog startup [in /home/krupni/microblog/app1/__init__.py:74]
+2018-05-21 14:15:42,303 ERROR: Exception on /user/nikola [GET] [in /home/krupni/microblog/venv/lib64/python3.5/site-packages/flask/app.py:1560]
+Traceback (most recent call last):
+  File "/home/krupni/microblog/venv/lib64/python3.5/site-packages/flask/app.py", line 1982, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/krupni/microblog/venv/lib64/python3.5/site-packages/flask/app.py", line 1614, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/krupni/microblog/venv/lib64/python3.5/site-packages/flask/app.py", line 1517, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/home/krupni/microblog/venv/lib64/python3.5/site-packages/flask/_compat.py", line 33, in reraise
+    raise value
+  File "/home/krupni/microblog/venv/lib64/python3.5/site-packages/flask/app.py", line 1612, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/krupni/microblog/venv/lib64/python3.5/site-packages/flask/app.py", line 1598, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/home/krupni/microblog/venv/lib64/python3.5/site-packages/flask_login/utils.py", line 261, in decorated_view
+    return func(*args, **kwargs)
+  File "/home/krupni/microblog/app1/routes.py", line 129, in user
+    return render_template('user.html', user=user, posts=posts.items, next_url=next_url, prev_url=prev_url)
+  File "/home/krupni/microblog/venv/lib64/python3.5/site-packages/flask/templating.py", line 134, in render_template
+    context, ctx.app)
+  File "/home/krupni/microblog/venv/lib64/python3.5/site-packages/flask/templating.py", line 116, in _render
+    rv = template.render(context)
+  File "/home/krupni/microblog/venv/lib64/python3.5/site-packages/jinja2/environment.py", line 1008, in render
+    return self.environment.handle_exception(exc_info, True)
+  File "/home/krupni/microblog/venv/lib64/python3.5/site-packages/jinja2/environment.py", line 780, in handle_exception
+    reraise(exc_type, exc_value, tb)
+  File "/home/krupni/microblog/venv/lib64/python3.5/site-packages/jinja2/_compat.py", line 37, in reraise
+    raise value.with_traceback(tb)
+  File "/home/krupni/microblog/app1/templates/user.html", line 1, in top-level template code
+    {% extends 'base.html' %}
+  File "/home/krupni/microblog/app1/templates/base.html", line 2, in top-level template code
+    {% extends 'bootstrap/base.html' %}
+  File "/home/krupni/microblog/venv/lib64/python3.5/site-packages/flask_bootstrap/templates/bootstrap/base.html", line 1, in top-level template code
+    {% block doc -%}
+  File "/home/krupni/microblog/venv/lib64/python3.5/site-packages/flask_bootstrap/templates/bootstrap/base.html", line 4, in block "doc"
+    {%- block html %}
+  File "/home/krupni/microblog/venv/lib64/python3.5/site-packages/flask_bootstrap/templates/bootstrap/base.html", line 20, in block "html"
+    {% block body -%}
+  File "/home/krupni/microblog/venv/lib64/python3.5/site-packages/flask_bootstrap/templates/bootstrap/base.html", line 23, in block "body"
+    {% block content -%}
+  File "/home/krupni/microblog/app1/templates/base.html", line 51, in block "content"
+    {% block app_content %}
+  File "/home/krupni/microblog/app1/templates/user.html", line 14, in block "app_content"
+    {{ _('%(count)d following', count=user.followed.count()) }}</p>
+  File "/home/krupni/microblog/venv/lib64/python3.5/site-packages/jinja2/environment.py", line 430, in getattr
+    return getattr(obj, attribute)
+jinja2.exceptions.UndefinedError: 'app1.models.User object' has no attribute 'followed'
+2018-05-21 14:16:26,691 INFO: Microblog startup [in /home/krupni/microblog/app1/__init__.py:74]
+2018-05-21 14:50:32,371 INFO: Microblog startup [in /home/krupni/microblog/app1/__init__.py:74]
+2018-05-21 15:04:06,183 INFO: Microblog startup [in /home/krupni/microblog/app1/__init__.py:74]
+2018-05-21 16:22:05,992 INFO: Microblog startup [in /home/krupni/microblog/app1/__init__.py:74]
+2018-05-21 16:23:23,206 INFO: Microblog startup [in /home/krupni/microblog/app1/__init__.py:74]
+2018-05-21 16:23:52,631 INFO: Microblog startup [in /home/krupni/microblog/app1/__init__.py:74]
+2018-05-21 16:24:07,822 INFO: Microblog startup [in /home/krupni/microblog/app1/__init__.py:74]
+2018-05-21 16:24:58,362 INFO: Microblog startup [in /home/krupni/microblog/app1/__init__.py:74]
+2018-05-21 16:25:06,275 INFO: Microblog startup [in /home/krupni/microblog/app1/__init__.py:74]
+2018-05-21 16:26:42,852 INFO: Microblog startup [in /home/krupni/microblog/app1/__init__.py:74]
+2018-05-21 16:27:01,757 INFO: Microblog startup [in /home/krupni/microblog/app1/__init__.py:74]
+2018-05-21 16:28:44,763 INFO: Microblog startup [in /home/krupni/microblog/app1/__init__.py:74]
+2018-05-21 16:29:18,315 INFO: Microblog startup [in /home/krupni/microblog/app1/__init__.py:74]
+2018-05-21 16:38:39,531 INFO: Microblog startup [in /home/krupni/microblog/app1/__init__.py:74]

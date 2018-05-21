@@ -2,7 +2,7 @@
 {% import 'bootstrap/wtf.html' as wtf %}
 
 {% block app_content %}
-    <h1>Sign In</h1>
+    <h1>{{ _('Sign In') }}</h1>
     {# <form action= '' method='POST'>
         {{ form.hidden_tag() }}
         <p>
@@ -32,9 +32,7 @@
         </div>
     </div>
     <br>
-        New User ? <a href="{{ url_for('register')}}">Click to Register!</a>
-    </p>
-    <p>
-        Forgot Your Password? <a href="{{ url_for('reset_password_request') }}">Click to Reset it</a>
-    </p>
+    <p>{{ _('New User?') }} <a href="{{ url_for('register') }}">{{ _('Click to Register!') }}</a></p>
+    {{ _('Forgot Your Password?') }}
+    <a href="{{ url_for('reset_password_request') }}">{{ _('Click to Reset It') }}</a>
 {% endblock %}

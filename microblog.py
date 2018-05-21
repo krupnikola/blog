@@ -1,6 +1,7 @@
 
-from app1 import app, db
+from app1 import app, db, cli
 from app1.models import User, Post
+
 
 
 # ovaj dekorator odredjuje sta ce biti importovano u flask shell kada se on pokrene

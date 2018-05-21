@@ -23,7 +23,7 @@ class User(UserMixin, db.Model):
     posts = db.relationship('Post', backref='author', lazy='dynamic')
     about_me = db.Column(db.String(140))
     last_seen = db.Column(db.DateTime, default=datetime.utcnow)
-    # for the given follower user, this atribute will give the list of users that this user is following
+    # for the given follower user, this attribute will give the list of users that this user is following
     follows = db.relationship(
         'User', secondary=followers,
         primaryjoin=(followers.c.follower_id == id),
@@ -52,7 +52,7 @@ class User(UserMixin, db.Model):
         if self.is_following(user):
             self.follows.remove(user)
 
-    def is_following(self,user):
+    def is_following(self, user):
         return self.follows.filter(followers.c.followed_id == user.id).count() > 0
 
     # list of posts that user is following
@@ -64,7 +64,7 @@ class User(UserMixin, db.Model):
         # posts from users that user is following are combined with user-own posts and displayed together - SQL UNION statement
         return followed.union(self.posts).order_by(Post.timestamp.desc())
 
-    # generates token for password reset when called for a particullar user
+    # generates token for password reset when called for a particular user
     # we define the fields in the token in form of a dictionary
     def get_reset_password_token(self, expires_in=600):
         return jwt.encode({'reset_password': self.id, 'exp': time() + expires_in},
@@ -99,6 +99,7 @@ class Post(db.Model):
     body = db.Column(db.String(140))
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    language = db.Column(db.String(5))
 
     def __repr__(self):
         return '<Post {}>'.format(self.body)

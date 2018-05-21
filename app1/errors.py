@@ -11,7 +11,7 @@ def not_found_error(error):
 
 @app.errorhandler(500)
 def internal_error(error):
-	# this command drops everything that is in the db session and has not been commited when the error happened
+	# this command drops everything that is in the db session and has not been committed when the error happened
 	# so the next session starts clean
 	# command opposite od db.session.commit()
 	db.session.rollback()
