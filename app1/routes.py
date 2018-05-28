@@ -1,4 +1,4 @@
-from flask import render_template, flash, redirect, url_for, request, g
+from flask import render_template, flash, redirect, url_for, request, g, jsonify
 from werkzeug.urls import url_parse
 from datetime import datetime
 from app1 import app, db
@@ -8,6 +8,7 @@ from app1.models import User, Post
 from app1.email import send_password_reset_email
 from flask_babel import _, get_locale
 from guess_language import guess_language
+from app1.translate import translate
 
 
 @app.before_request
@@ -28,8 +29,10 @@ def before_request():
 def index():
     form = PostForm()
     if form.validate_on_submit():
-        language = guess_language
-        post = Post(body=form.post.data, author=current_user)
+        language = guess_language(form.post.data)
+        if language == 'UNKNOWN' or len(language) > 5:
+            language = ''
+        post = Post(body=form.post.data, author=current_user, language=language)
         db.session.add(post)
         db.session.commit()
         flash(_('Your post is now live!'))
@@ -55,9 +58,9 @@ def explore():
     page = request.args.get('page', 1, type=int)
     posts = Post.query.order_by(Post.timestamp.desc()).paginate(
         page, app.config['POSTS_PER_PAGE'], False)
-    next_url = url_for('index', page=posts.next_num) \
+    next_url = url_for('explore', page=posts.next_num) \
         if posts.has_next else None
-    prev_url = url_for('index', page=posts.prev_num) \
+    prev_url = url_for('explore', page=posts.prev_num) \
         if posts.has_prev else None
     # we'll use index template to display all the posts, but without the form that is present
     # on /index page - this is accomplished by adding {% if form %} condition in the index.html
@@ -147,7 +150,7 @@ def edit_profile():
 
 # route for the user that a logged in user wants to start following
 @app.route('/follow/<username>')
-@ login_required
+@login_required
 def follow(username):
     user = User.query.filter_by(username=username).first()
     if user is None:
@@ -163,7 +166,7 @@ def follow(username):
 
 
 @app.route('/unfollow/<username>')
-@ login_required
+@login_required
 def unfollow(username):
     user = User.query.filter_by(username=username).first()
     if user is None:
@@ -207,3 +210,18 @@ def reset_password(token):
         flash(_('Your password has been reset.'))
         return redirect(url_for('login'))
     return render_template('reset_password.html', form=form)
+
+
+# this is a translate route with only the POST method
+# it uses the translate function defined in translate.py
+# ATTENTION - data pulled from request in a different way then when we have flask form and making a POST request
+# now we have a data already on the page, so we need to take it from the query string
+@app.route('/translate', methods=['POST'])
+@login_required
+def translate_text():
+    # inside, "translate" function defined inside translate.py is called
+    # the POST request in this route does not originate from wtf form as in other cases so we access fields in
+    # the request directly from the request object and not through WTF FORM
+    return jsonify({'text': translate(request.form['text'],
+                                      request.form['source_language'],
+                                      request.form['dest_language'])})

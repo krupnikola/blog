@@ -28,6 +28,7 @@
                     {% else %}
                     <li><a href="{{ url_for('user', username=current_user.username) }}">{{ _('Profile') }}</a></li>
                     <li><a href="{{ url_for('logout') }}">{{ _('Logout') }}</a></li>
+                    <li><p>{{ g.locale }}</p></li>
                     {% endif %}
                 </ul>
             </div>
@@ -61,4 +62,21 @@
     {# this way we select the nalguage for the current request #}
     {# language information is stored in a g object during one request #}
     {{ moment.lang(g.locale) }}
+    {# under script tag we can include our own javascript function or refference to a file with a function #}
+    <script>
+        function translate_js(sourceElem, destElem, sourceLang, destLang) {
+            {# this line puts statis html content on the destElement when this function is called #}
+            {# it is a static content that will be there till the response comes and takes it's place #}
+            $(destElem).html('<img src="{{ url_for('static', filename='loading.gif') }}">');
+            $.post('/translate', {
+                text: $(sourceElem).text(),
+                source_language: sourceLang,
+                dest_language: destLang
+            }).done(function(response) {
+                $(destElem).text(response['text'])
+            }).fail(function() {
+                $(destElem).text("{{ _('Error: Could not contact server.') }}");
+            });
+        }
+    </script>
 {% endblock %}

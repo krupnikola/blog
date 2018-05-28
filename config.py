@@ -5,7 +5,7 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 
 
 class Config(object):
-	# ako postoji environ variable imena SECRET_KEY onda ce procitati is operativnog sistema, a ako ne onda koristi hardkodovanu
+	# ako postoji environ variable imena SECRET_KEY onda ce procitati iz operativnog sistema, a ako ne onda koristi hardkodovanu
 	SECRET_KEY = os.environ.get('SECRET_KEY') or 'you-will-never-guess'
 	# URL that defines type and location of the database, napravili smo apsolutnu putanju do baze
 	# opet smo ostavili mogucnost da ako postoji environ variable koaj sadrzi DATABASE_URL da to uzmemo
@@ -29,3 +29,6 @@ class Config(object):
 
 	# supported languages list for Babel
 	LANGUAGES = ['en', 'es']
+
+	# Microsoft translator API key
+	MS_TRANSLATOR_KEY = os.getenv('MS_TRANSLATOR_KEY') or '65c794c824324a14990f79eb6702ab93'

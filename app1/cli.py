@@ -1,4 +1,5 @@
 # a file that stores custom created flask-babel CLI commands for managing translations file
+# it will be enough to import it to microblog.py to get the custom CLI commands registered in runtime
 
 from app1 import app
 import os

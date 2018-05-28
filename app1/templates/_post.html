@@ -27,7 +27,18 @@
             {{ _('%(username)s said %(when)s',
                 username=user_link, when=moment(post.timestamp).fromNow()) }}
             <br>
-            {{ post.body }}
+            <span id="post{{ post.id }}">{{ post.body }}</span>
+            <br><br>
+             {% if post.language and post.language != g.locale %}
+                <span id="translation{{ post.id }}">
+                    {# instead of url for this a tag, it will be a javascript code that will be triggered #}
+                    <a href="javascript:translate_js(
+                                '#post{{ post.id }}',
+                                '#translation{{ post.id }}',
+                                '{{ post.language }}',
+                                '{{ g.locale }}');">{{ _('Translate') }}</a>
+                </span>
+             {% endif %}
         </td>
     </tr>
 </table>

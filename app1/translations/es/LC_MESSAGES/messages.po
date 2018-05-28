@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2018-05-21 14:31+0200\n"
+"POT-Creation-Date: 2018-05-23 15:46+0200\n"
 "PO-Revision-Date: 2018-05-21 14:32+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: es\n"
@@ -38,7 +38,7 @@ msgstr "Contraseña"
 msgid "Remember Me"
 msgstr "Recordarme"
 
-#: app1/forms.py:12 app1/routes.py:89 app1/templates/login.html:5
+#: app1/forms.py:12 app1/routes.py:92 app1/templates/login.html:5
 msgid "Sign In"
 msgstr "Ingresar"
 
@@ -82,68 +82,76 @@ msgstr ""
 msgid "Request Password Reset"
 msgstr ""
 
-#: app1/routes.py:35
+#: app1/routes.py:38
 msgid "Your post is now live!"
 msgstr ""
 
-#: app1/routes.py:49 app1/templates/base.html:22
+#: app1/routes.py:52 app1/templates/base.html:22
 msgid "Home"
 msgstr ""
 
-#: app1/routes.py:65 app1/templates/base.html:23
+#: app1/routes.py:68 app1/templates/base.html:23
 msgid "Explore"
 msgstr ""
 
-#: app1/routes.py:78
+#: app1/routes.py:81
 msgid "Invalid username or password"
 msgstr ""
 
-#: app1/routes.py:111
+#: app1/routes.py:114
 msgid "Congratulations, you are now a registered user!"
 msgstr ""
 
-#: app1/routes.py:113 app1/routes.py:194
+#: app1/routes.py:116 app1/routes.py:197
 #: app1/templates/reset_password_request.html:5
 msgid "Reset Password"
 msgstr ""
 
-#: app1/routes.py:140
+#: app1/routes.py:143
 msgid "Your changes have been saved."
 msgstr ""
 
-#: app1/routes.py:145 app1/templates/edit_profile.html:5
+#: app1/routes.py:148 app1/templates/edit_profile.html:5
 msgid "Edit Profile"
 msgstr ""
 
-#: app1/routes.py:154 app1/routes.py:170
+#: app1/routes.py:157 app1/routes.py:173
 #, python-format
 msgid "User %(username)s not found."
 msgstr ""
 
-#: app1/routes.py:157
+#: app1/routes.py:160
 msgid "You cannot follow yourself!"
 msgstr ""
 
-#: app1/routes.py:161
+#: app1/routes.py:164
 #, python-format
 msgid "You are following %(username)s!"
 msgstr ""
 
-#: app1/routes.py:173
+#: app1/routes.py:176
 msgid "You cannot unfollow yourself!"
 msgstr ""
 
-#: app1/routes.py:177
+#: app1/routes.py:180
 #, python-format
 msgid "You are not following %(username)s."
 msgstr ""
 
-#: app1/routes.py:192
+#: app1/routes.py:195
 msgid "Check your email for the instructions to reset your password"
 msgstr ""
 
-#: app1/routes.py:207
+#: app1/routes.py:210
 msgid "Your password has been reset."
+msgstr ""
+
+#: app1/translate.py:11
+msgid "Error: the translation  service is not configured."
+msgstr ""
+
+#: app1/translate.py:16
+msgid "Error: the translation service failed"
 msgstr ""
 
 #: app1/templates/404.html:4
@@ -163,6 +171,10 @@ msgstr ""
 msgid "%(username)s said %(when)s"
 msgstr ""
 
+#: app1/templates/_post.html:39
+msgid "Translate"
+msgstr ""
+
 #: app1/templates/base.html:5
 msgid "Welcome to Microblog"
 msgstr ""
@@ -177,6 +189,10 @@ msgstr ""
 
 #: app1/templates/base.html:30
 msgid "Logout"
+msgstr ""
+
+#: app1/templates/base.html:78
+msgid "Error: Could not contact server."
 msgstr ""
 
 #: app1/templates/index.html:5
