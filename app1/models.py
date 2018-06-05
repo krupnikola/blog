@@ -1,4 +1,5 @@
-from app1 import db, login, app
+from app1 import db, login
+from flask import current_app
 from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
@@ -70,7 +71,7 @@ class User(UserMixin, db.Model):
         return jwt.encode({'reset_password': self.id, 'exp': time() + expires_in},
             # adds .decode at the end because token encoder returns byte string and
             # we want normal string to work with 
-            app.config['SECRET_KEY'], algorithm='HS256').decode('utf-8')
+            current_app.config['SECRET_KEY'], algorithm='HS256').decode('utf-8')
 
     # verifies the received token
     # made it as a static method because user is unknown in this moment so this method can not be called on 
@@ -80,7 +81,7 @@ class User(UserMixin, db.Model):
         try:
             # we are taking the id of the user from the dictionary under the key ['reset_password']
             # that is returned from token if the token iz validated
-            id = jwt.decode(token, app.config['SECRET_KEY'],
+            id = jwt.decode(token, current_app.config['SECRET_KEY'],
                             algorithms=['HS256'])['reset_password']
         except:
             # returning none just not to break the app if the user is unknown

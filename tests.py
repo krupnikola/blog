@@ -1,18 +1,28 @@
 from datetime import datetime, timedelta
 import unittest
-from app1 import app, db
+from app1 import db, create_app
 from app1.models import User, Post
+from config import Config
+
+
+class TestConfig(Config):
+    TESTING = True
+    # za testiranje se koristi lokalna baza u memoriji, overajdovana je promenljiva iz Config fajla
+    SQLALCHEMY_DATABASE_URI = 'sqlite://'
+
 
 class UserModelCase(unittest.TestCase):
     def setUp(self):
-        # necemo da se testovi rade na produkcionoj bazi vec kreiramo novu sa novim URI-jem
-        app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite://'
+        self.app = create_app(TestConfig)
+        self.app_context = self.app.app_context()
+        self.app_context.push()
         # ovo je sqlalchemy komanda za kreiranje baze, u aplikaciji se to radi kroz migrate framework
         db.create_all()
 
     def tearDown(self):
         db.session.remove()
         db.drop_all()
+        self.app_context.pop()
 
     def test_password_hashing(self):
         u = User(username='susan')
@@ -86,6 +96,7 @@ class UserModelCase(unittest.TestCase):
         self.assertEqual(f2, [p2, p3])
         self.assertEqual(f3, [p3, p4])
         self.assertEqual(f4, [p4])
+
 
 if __name__ == '__main__':
     unittest.main(verbosity=2)
