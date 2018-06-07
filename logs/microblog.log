@@ -34,3 +34,9 @@ Traceback (most recent call last):
     raise TemplateNotFound(template)
 jinja2.exceptions.TemplateNotFound: base.html
 2018-06-05 10:14:03,230 INFO: Microblog startup [in /home/krupni/microblog/app1/__init__.py:90]
+2018-06-05 11:54:57,788 INFO: Microblog startup [in /home/krupni/microblog/app1/__init__.py:90]
+2018-06-05 11:55:50,118 INFO: Microblog startup [in /home/krupni/microblog/app1/__init__.py:90]
+2018-06-06 16:26:10,176 INFO: Microblog startup [in /home/krupni/microblog/app1/__init__.py:95]
+2018-06-06 19:18:28,317 INFO: Microblog startup [in /home/krupni/microblog/app1/__init__.py:95]
+2018-06-07 11:45:11,372 INFO: Microblog startup [in /home/krupni/microblog/app1/__init__.py:95]
+2018-06-07 12:31:10,578 INFO: Microblog startup [in /home/krupni/microblog/app1/__init__.py:95]

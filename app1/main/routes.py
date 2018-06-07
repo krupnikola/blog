@@ -5,7 +5,7 @@ from flask_login import current_user, login_required
 from flask_babel import _, get_locale
 from guess_language import guess_language
 from app1 import db
-from app1.main.forms import EditProfileForm, PostForm
+from app1.main.forms import EditProfileForm, PostForm, SearchForm
 from app1.models import User, Post
 from app1.translate import translate
 from app1.main import bp
@@ -15,9 +15,13 @@ from app1.main import bp
 def before_request():
     if current_user.is_authenticated:
         current_user.last_seen = datetime.utcnow()
-        # no need to put .add() before commit because the user is already in the database, we are just submitting the changes
+        # no need to put .add() before committing the new timestamp
+        # because the user is already in the database, we are just submitting the changes
         db.session.commit()
-    # before every request, locale is set for a particular request
+        # the search form should be available on every page the user is viewing,
+        # so we store it in the g object so it is available during full application context
+        g.search_form = SearchForm()
+    # during every request, locale is set for a particular request
     # and now it can be included in base template into moment package
     g.locale = str(get_locale())
 
@@ -32,8 +36,7 @@ def index():
         language = guess_language(form.post.data)
         if language == 'UNKNOWN' or len(language) > 5:
             language = ''
-        post = Post(body=form.post.data, author=current_user,
-                    language=language)
+        post = Post(body=form.post.data, author=current_user, language=language)
         db.session.add(post)
         db.session.commit()
         flash(_('Your post is now live!'))
@@ -153,3 +156,22 @@ def translate_text():
     return jsonify({'text': translate(request.form['text'],
                                       request.form['source_language'],
                                       request.form['dest_language'])})
+
+
+@bp.route('/search', methods=['GET'])
+@login_required
+def search():
+    # since the form is submitted with GET method, we can not use Flask-WTF validate_on_submit() since
+    # it only supports POST method, so we use only validate() and
+    # if the user submitted empty search form he is redirected to the page with all posts
+    if not g.search_form.validate():
+        return redirect(url_for('main.explore'))
+    page = request.args.get('page', 1, type=int)
+    posts, total = Post.search(g.search_form.q.data, page,
+                               current_app.config['POSTS_PER_PAGE'])
+    next_url = url_for('main.search', q=g.search_form.q.data, page=page + 1) \
+        if total > page * current_app.config['POSTS_PER_PAGE'] else None
+    prev_url = url_for('main.search', q=g.search_form.q.data, page=page - 1) \
+        if page > 1 else None
+    return render_template('main/search.html', title=_('Search'), posts=posts,
+                           next_url=next_url, prev_url=prev_url)
