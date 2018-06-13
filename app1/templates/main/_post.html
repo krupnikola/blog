@@ -20,10 +20,17 @@
         </td>
         <td>
             {% set user_link %}
-                <a href="{{ url_for('main.user', username=post.author.username) }}">
-                    {{ post.author.username }}
-                </a>
+{#                <a href="{{ url_for('main.user', username=post.author.username) }}">#}
+{#                    {{ post.author.username }}#}
+{#                </a>#}
+                {# changed the standard username link to a newly defined popup class - interesting! #}
+                <span class="user_popup">
+                    <a href="{{ url_for('main.user', username=post.author.username) }}">
+                        {{ post.author.username }}
+                    </a>
+                </span>
             {% endset %}
+            {# time passed since the user shared a blog post #}
             {{ _('%(username)s said %(when)s',
                 username=user_link, when=moment(post.timestamp).fromNow()) }}
             <br>

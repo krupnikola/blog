@@ -40,3 +40,7 @@ jinja2.exceptions.TemplateNotFound: base.html
 2018-06-06 19:18:28,317 INFO: Microblog startup [in /home/krupni/microblog/app1/__init__.py:95]
 2018-06-07 11:45:11,372 INFO: Microblog startup [in /home/krupni/microblog/app1/__init__.py:95]
 2018-06-07 12:31:10,578 INFO: Microblog startup [in /home/krupni/microblog/app1/__init__.py:95]
+2018-06-12 15:02:18,806 INFO: Microblog startup [in /home/krupni/microblog/app1/__init__.py:95]
+2018-06-12 15:22:22,419 INFO: Microblog startup [in /home/krupni/microblog/app1/__init__.py:95]
+2018-06-12 17:23:30,709 INFO: Microblog startup [in /home/krupni/microblog/app1/__init__.py:95]
+2018-06-13 12:37:21,253 INFO: Microblog startup [in /home/krupni/microblog/app1/__init__.py:95]

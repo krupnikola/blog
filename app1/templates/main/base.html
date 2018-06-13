@@ -68,7 +68,7 @@
     {{ super() }}
     {# this line includes moment.js javascript library in the template #}
     {{ moment.include_moment() }}
-    {# this way we select the nalguage for the current request #}
+    {# this way we select the laguage for the current request #}
     {# language information is stored in a g object during one request #}
     {{ moment.lang(g.locale) }}
     {# under script tag we can include our own javascript function or refference to a file with a function #}
@@ -87,5 +87,51 @@
                 $(destElem).text("{{ _('Error: Could not contact server.') }}");
             });
         }
+
+
+        {# JS function for selecting all the posts based on user_popup class#}
+        $(function () {
+            var timer = null;
+            var xhr = null;
+            $('.user_popup').hover(
+                function(event) {
+                    // mouse in event handler
+                    var elem = $(event.currentTarget);
+                    timer = setTimeout(function() {
+                        timer = null;
+                        xhr = $.ajax(
+                            '/user/' + elem.first().text().trim() + '/popup').done(
+                                function(data) {
+                                    xhr = null;
+                                    elem.popover({
+                                        trigger: 'manual',
+                                        html: true,
+                                        animation: false,
+                                        container: elem,
+                                        content: data
+                                    }).popover('show');
+                                    flask_moment_render_all();
+                                }
+                            );
+                    }, 1000);
+                },
+                function(event) {
+                    // mouse out event handler
+                    var elem = $(event.currentTarget);
+                    if (timer) {
+                        clearTimeout(timer);
+                        timer = null;
+                    }
+                    else if (xhr) {
+                        xhr.abort();
+                        xhr = null;
+                    }
+                    else {
+                        elem.popover('destroy');
+                    }
+                }
+            );
+        });
+
     </script>
 {% endblock %}
