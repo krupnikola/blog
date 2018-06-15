@@ -1,6 +1,6 @@
 
 from app1 import create_app, db, cli
-from app1.models import User, Post
+from app1.models import User, Post, Message, Notification
 
 # first - we call the application factory function that creates the app instance
 app = create_app()
@@ -13,4 +13,5 @@ cli.register(app)
 # ovaj dekorator odredjuje sta ce biti importovano u flask shell kada se on pokrene
 @app.shell_context_processor
 def make_shell_context():
-    return {'db': db, 'User': User, 'Post': Post}
+    return {'db': db, 'User': User, 'Post': Post, 'Message': Message,
+            'Notification': Notification}

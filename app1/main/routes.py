@@ -5,8 +5,8 @@ from flask_login import current_user, login_required
 from flask_babel import _, get_locale
 from guess_language import guess_language
 from app1 import db
-from app1.main.forms import EditProfileForm, PostForm, SearchForm
-from app1.models import User, Post
+from app1.main.forms import EditProfileForm, PostForm, SearchForm, MessageForm
+from app1.models import User, Post, Message, Notification
 from app1.translate import translate
 from app1.main import bp
 
@@ -145,7 +145,7 @@ def unfollow(username):
 
 # this is a translate route with only the POST method
 # it uses the translate function defined in translate.py
-# ATTENTION - data pulled from request in a different way then when we have flask form and making a POST request
+# ATTENTION - data is pulled from request in a different way then when we have flask form and we are making POST request
 # now we have a data already on the page, so we need to take it from the query string
 @bp.route('/translate', methods=['POST'])
 @login_required
@@ -181,14 +181,60 @@ def search():
 @bp.route('/user/<username>/popup', methods=['GET'])
 @login_required
 def user_popup(username):
-    user=User.query.filter_by(username=username).first_or_404()
+    user = User.query.filter_by(username=username).first_or_404()
     return render_template('main/user_popup.html', user=user)
 
 
+# route for sending messages
+@bp.route('/send_message/<recipient>', methods=['GET', 'POST'])
+@login_required
+def send_message(recipient):
+    # load recipient user from the database
+    user = User.query.filter_by(username=recipient).first_or_404()
+    form = MessageForm()
+    if form.validate_on_submit():
+        msg = Message(author=current_user, recipient=user, body=form.message.data)
+        db.session.add(msg)
+        # as arguments, we pass the name of the notification and number of new messages
+        user.add_notification('unread_message_count', user.new_messages())
+        # because add_notification alters the Notification table, this changes must be commited
+        db.session.commit()
+        flash(_('Your message has been sent'))
+        return redirect(url_for('main.user', username=recipient))
+    return render_template('main/send_message.html', title=_('Send Message'), form=form, recipient=recipient)
 
 
+# route for reading private messages by user
+@bp.route('/messages', methods=['GET'])
+def messages():
+    # first we update the last read time in the db for the current user
+    current_user.last_message_read_time = datetime.utcnow()
+    # reset also the notification about unread messages to zero since the user is reading them in the moment
+    current_user.add_notification("unread_message_count", 0)
+    # commit the change to the last seen time in the database
+    db.session.commit()
+    page = request.args.get('page', 1, type=int)
+    messages = current_user.messages_received.order_by(Message.timestamp.desc()).paginate(
+        page, current_app.config['POSTS_PER_PAGE'], False)
+    next_url = url_for('main.messages', page=messages.next_num) if messages.has_next else None
+    prev_url = url_for('main.messages', page=messages.prev_num) if messages.has_prev else None
+    # the return of the paginate is pagination object, not a list as it is with .all(), so to access list of items,
+    # we need to add .items to the pagination object = messages
+    return render_template('main/messages.html', messages=messages.items, next_url=next_url, prev_url=prev_url)
 
 
-
-
-
+# route for client to retrieve notifications for the logged in user via Ajax call
+@bp.route('/notifications')
+@login_required
+def notifications():
+    # variable that holds the last time client requested the notifications, default is 0.0 (float number)
+    since = request.args.get('since', 0.0, type=float)
+    # this variable will hold all the notifications pulled from the database since the last 'since' moment
+    notifications = current_user.notifications.filter(
+        Notification.timestamp > since).order_by(Notification.timestamp.asc())
+    # we make the return value a JSON list of notifications because that is easier for the client (JS) to handle
+    return jsonify([{
+        'name': n.name,
+        'data': n.get_data(),
+        'timestamp': n.timestamp
+    } for n in notifications])
