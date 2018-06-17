@@ -66,6 +66,21 @@
         {% endif %}
         {% endwith %}
 
+        {% if current_user.is_authenticated %}
+            {% with tasks = current_user.get_tasks_in_progress() %}
+            {% if tasks %}
+                {% for task in tasks %}
+                    <div class="alert alert-success" role="alert">
+                    {{ task.description }}
+                    {# IMPORTANT - here percentage will be updated dynamicaly through JS, that is why there is an id #}
+                    {# element to bind the JS function that will call the server for the update #}
+                    <span id="{{ task.id }}-progress">{{ task.get_progress() }}</span>%
+                    </div>
+                {% endfor %}
+            {% endif %}
+            {% endwith %}
+        {% endif %}
+
         {# application content needs to be provided in the app_content block from this point #}
         {# untill now, it was just the content block but from now on we have one more layer of html inheritance #}
         {% block app_content %}
@@ -150,6 +165,12 @@
         }
 
 
+        function set_task_progress(task_id, progress) {
+            $('#' + task_id + '-progress').text(progress);
+        }
+
+
+
         {# this function makes the Ajax call to the server #}
         {% if current_user.is_authenticated %}
             $(function() {
@@ -158,8 +179,17 @@
                     $.ajax('{{ url_for('main.notifications') }}?since=' + since).done(
                         function(notifications) {
                             for (var i = 0; i < notifications.length; i++) {
-                                if (notifications[i].name == 'unread_message_count')
+                            switch (notifications[i].name) {
+                                {# since now we have two types of notifications we use the same function as before but add switch statement #}
+                                {#  #}
+                                case 'unread_message_count':
                                     set_message_count(notifications[i].data);
+                                    break;
+                                case 'task_progress':
+                                    set_task_progress(notifications[i].data.task_id,
+                                        notifications[i].data.progress);
+                                    break;
+                            }
                                 since = notifications[i].timestamp;
                             }
                         }

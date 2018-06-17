@@ -40,3 +40,6 @@ class Config(object):
 
 	# Elasticsearch connection URL for the service
 	ELASTICSEARCH_URL = os.environ.get('ELASTICSEARCH_URL')
+
+	# Redis service config, if not specified we'll use local redis
+	REDIS_URL = os.environ.get('REDIS_URL') or 'redis://'

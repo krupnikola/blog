@@ -238,3 +238,18 @@ def notifications():
         'data': n.get_data(),
         'timestamp': n.timestamp
     } for n in notifications])
+
+
+# route for exporting blogs of the currently logged on user
+@bp.route('/export_posts')
+@login_required
+def export_posts():
+    # if user is already running an export...
+    if current_user.get_task_in_progress('export_posts'):
+        flash(_('An export task is currently in progress'))
+    else:
+        # launch the export through launch_task helper method
+        current_user.launch_task('export_posts', _('Exporting posts...'))
+        # session must be commited since this helper function modifies the database
+        db.session.commit()
+    return redirect(url_for('main.user', username=current_user.username))
