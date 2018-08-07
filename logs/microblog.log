@@ -1,46 +1,36 @@
-2018-06-05 10:12:04,704 ERROR: Exception on /index [GET] [in /home/krupni/microblog/venv/lib64/python3.5/site-packages/flask/app.py:1560]
+2018-06-14 16:32:31,419 INFO: Microblog startup [in /home/krupni/microblog/app1/__init__.py:95]
+2018-06-15 13:12:37,715 INFO: Microblog startup [in /home/krupni/microblog/app1/__init__.py:95]
+2018-06-15 13:12:43,369 INFO: Microblog startup [in /home/krupni/microblog/app1/__init__.py:95]
+2018-06-15 13:32:34,894 INFO: Microblog startup [in /home/krupni/microblog/app1/__init__.py:95]
+2018-06-16 14:13:28,730 INFO: Microblog startup [in /home/krupni/microblog/app1/__init__.py:95]
+2018-06-16 14:13:41,948 INFO: Microblog startup [in /home/krupni/microblog/app1/__init__.py:95]
+2018-06-16 17:09:10,100 INFO: Microblog startup [in /home/krupni/microblog/app1/__init__.py:104]
+2018-06-16 17:09:28,677 INFO: Microblog startup [in /home/krupni/microblog/app1/__init__.py:104]
+2018-06-16 17:11:03,398 INFO: Microblog startup [in /home/krupni/microblog/app1/__init__.py:105]
+2018-06-16 17:43:46,155 INFO: Microblog startup [in /home/krupni/microblog/app1/__init__.py:105]
+2018-06-16 17:46:04,450 INFO: Microblog startup [in /home/krupni/microblog/app1/__init__.py:105]
+2018-06-16 17:48:09,556 INFO: Microblog startup [in /home/krupni/microblog/app1/__init__.py:105]
+2018-06-16 17:48:31,356 INFO: Microblog startup [in ./app1/__init__.py:105]
+2018-06-16 17:49:31,629 ERROR: Unhandled exception [in ./app1/main/tasks.py:58]
 Traceback (most recent call last):
-  File "/home/krupni/microblog/venv/lib64/python3.5/site-packages/flask/app.py", line 1982, in wsgi_app
-    response = self.full_dispatch_request()
-  File "/home/krupni/microblog/venv/lib64/python3.5/site-packages/flask/app.py", line 1614, in full_dispatch_request
-    rv = self.handle_user_exception(e)
-  File "/home/krupni/microblog/venv/lib64/python3.5/site-packages/flask/app.py", line 1517, in handle_user_exception
-    reraise(exc_type, exc_value, tb)
-  File "/home/krupni/microblog/venv/lib64/python3.5/site-packages/flask/_compat.py", line 33, in reraise
-    raise value
-  File "/home/krupni/microblog/venv/lib64/python3.5/site-packages/flask/app.py", line 1612, in full_dispatch_request
-    rv = self.dispatch_request()
-  File "/home/krupni/microblog/venv/lib64/python3.5/site-packages/flask/app.py", line 1598, in dispatch_request
-    return self.view_functions[rule.endpoint](**req.view_args)
-  File "/home/krupni/microblog/venv/lib64/python3.5/site-packages/flask_login/utils.py", line 261, in decorated_view
-    return func(*args, **kwargs)
-  File "/home/krupni/microblog/app1/main/routes.py", line 55, in index
-    prev_url=prev_url)
-  File "/home/krupni/microblog/venv/lib64/python3.5/site-packages/flask/templating.py", line 134, in render_template
-    context, ctx.app)
-  File "/home/krupni/microblog/venv/lib64/python3.5/site-packages/flask/templating.py", line 116, in _render
-    rv = template.render(context)
-  File "/home/krupni/microblog/venv/lib64/python3.5/site-packages/jinja2/environment.py", line 1008, in render
-    return self.environment.handle_exception(exc_info, True)
-  File "/home/krupni/microblog/venv/lib64/python3.5/site-packages/jinja2/environment.py", line 780, in handle_exception
-    reraise(exc_type, exc_value, tb)
-  File "/home/krupni/microblog/venv/lib64/python3.5/site-packages/jinja2/_compat.py", line 37, in reraise
-    raise value.with_traceback(tb)
-  File "/home/krupni/microblog/app1/templates/main/index.html", line 1, in top-level template code
-    {% extends "base.html" %}
-  File "/home/krupni/microblog/venv/lib64/python3.5/site-packages/flask/templating.py", line 57, in get_source
-    return self._get_source_fast(environment, template)
-  File "/home/krupni/microblog/venv/lib64/python3.5/site-packages/flask/templating.py", line 85, in _get_source_fast
-    raise TemplateNotFound(template)
-jinja2.exceptions.TemplateNotFound: base.html
-2018-06-05 10:14:03,230 INFO: Microblog startup [in /home/krupni/microblog/app1/__init__.py:90]
-2018-06-05 11:54:57,788 INFO: Microblog startup [in /home/krupni/microblog/app1/__init__.py:90]
-2018-06-05 11:55:50,118 INFO: Microblog startup [in /home/krupni/microblog/app1/__init__.py:90]
-2018-06-06 16:26:10,176 INFO: Microblog startup [in /home/krupni/microblog/app1/__init__.py:95]
-2018-06-06 19:18:28,317 INFO: Microblog startup [in /home/krupni/microblog/app1/__init__.py:95]
-2018-06-07 11:45:11,372 INFO: Microblog startup [in /home/krupni/microblog/app1/__init__.py:95]
-2018-06-07 12:31:10,578 INFO: Microblog startup [in /home/krupni/microblog/app1/__init__.py:95]
-2018-06-12 15:02:18,806 INFO: Microblog startup [in /home/krupni/microblog/app1/__init__.py:95]
-2018-06-12 15:22:22,419 INFO: Microblog startup [in /home/krupni/microblog/app1/__init__.py:95]
-2018-06-12 17:23:30,709 INFO: Microblog startup [in /home/krupni/microblog/app1/__init__.py:95]
-2018-06-13 12:37:21,253 INFO: Microblog startup [in /home/krupni/microblog/app1/__init__.py:95]
+  File "./app1/main/tasks.py", line 55, in export_posts
+    sync=True)
+  File "./app1/email.py", line 28, in send_email
+    mail.send(msg)
+  File "/home/krupni/microblog/venv/lib64/python3.5/site-packages/flask_mail.py", line 491, in send
+    with self.connect() as connection:
+  File "/home/krupni/microblog/venv/lib64/python3.5/site-packages/flask_mail.py", line 144, in __enter__
+    self.host = self.configure_host()
+  File "/home/krupni/microblog/venv/lib64/python3.5/site-packages/flask_mail.py", line 158, in configure_host
+    host = smtplib.SMTP(self.mail.server, self.mail.port)
+  File "/usr/lib64/python3.5/smtplib.py", line 251, in __init__
+    (code, msg) = self.connect(host, port)
+  File "/usr/lib64/python3.5/smtplib.py", line 336, in connect
+    self.sock = self._get_socket(host, port, self.timeout)
+  File "/usr/lib64/python3.5/smtplib.py", line 307, in _get_socket
+    self.source_address)
+  File "/usr/lib64/python3.5/socket.py", line 712, in create_connection
+    raise err
+  File "/usr/lib64/python3.5/socket.py", line 703, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [Errno 111] Connection refused

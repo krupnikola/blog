@@ -7,7 +7,6 @@ from config import Config
 
 class TestConfig(Config):
     TESTING = True
-    # za testiranje se koristi lokalna baza u memoriji, overajdovana je promenljiva iz Config fajla
     SQLALCHEMY_DATABASE_URI = 'sqlite://'
 
 
@@ -16,7 +15,6 @@ class UserModelCase(unittest.TestCase):
         self.app = create_app(TestConfig)
         self.app_context = self.app.app_context()
         self.app_context.push()
-        # ovo je sqlalchemy komanda za kreiranje baze, u aplikaciji se to radi kroz migrate framework
         db.create_all()
 
     def tearDown(self):

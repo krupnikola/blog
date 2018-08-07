@@ -72,8 +72,7 @@
                 {% for task in tasks %}
                     <div class="alert alert-success" role="alert">
                     {{ task.description }}
-                    {# IMPORTANT - here percentage will be updated dynamicaly through JS, that is why there is an id #}
-                    {# element to bind the JS function that will call the server for the update #}
+
                     <span id="{{ task.id }}-progress">{{ task.get_progress() }}</span>%
                     </div>
                 {% endfor %}
@@ -81,8 +80,7 @@
             {% endwith %}
         {% endif %}
 
-        {# application content needs to be provided in the app_content block from this point #}
-        {# untill now, it was just the content block but from now on we have one more layer of html inheritance #}
+
         {% block app_content %}
         
         {% endblock %}
@@ -91,16 +89,10 @@
 
 {% block scripts %}
     {{ super() }}
-    {# this line includes moment.js javascript library in the template #}
     {{ moment.include_moment() }}
-    {# this way we select the laguage for the current request #}
-    {# language information is stored in a g object during one request #}
     {{ moment.lang(g.locale) }}
-    {# under script tag we can include our own javascript function or refference to a file with a function #}
     <script>
         function translate_js(sourceElem, destElem, sourceLang, destLang) {
-            {# this line puts statis html content on the destElement when this function is called #}
-            {# it is a static content that will be there till the response comes and takes it's place #}
             $(destElem).html('<img src="{{ url_for('static', filename='loading.gif') }}">');
             $.post('/translate', {
                 text: $(sourceElem).text(),

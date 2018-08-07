@@ -11,8 +11,7 @@ from flask_babel import _
 
 @bp.route('/login', methods=['GET', 'POST'])
 def login():
-    # first, checks if the user is logged in already
-    # if yes, redirects away from the login form to /index
+
     if current_user.is_authenticated:
         return redirect(url_for('main.index'))
     form = LoginForm()
@@ -22,11 +21,8 @@ def login():
             flash(_('Invalid username or password'))
             return redirect(url_for('auth.login'))
         login_user(user, remember=form.remember_me.data)
-        # save the querystring part of the URL for later redirection, feature of flask.redirect
         next_page = request.args.get('next')
-        # security measure, if netloc part of the next_page querystring is not empty, never redirect to it
-        # if someone inserts http://something as a querystring it is a problem
-        # # in other words, if next = absolute URL, do not redirect to it
+
         if not next_page or url_parse(next_page).netloc != '':
             next_page = url_for('main.index')
         return redirect(next_page)
@@ -41,8 +37,7 @@ def logout():
 
 @bp.route('/register', methods=['GET', 'POST'])
 def register():
-    # first, checks if the user is logged in already
-    # if yes, redirects away from the login form to /index
+
     if current_user.is_authenticated:
         return redirect(url_for('main.index'))
     form = RegistrationForm()
@@ -57,7 +52,6 @@ def register():
     return render_template('auth/register.html', title=_('Reset Password'), form=form)
 
 
-# route for reset password request form, and email sending to the user
 
 @bp.route('/reset_password_request', methods=['GET', 'POST'])
 def reset_password_request():

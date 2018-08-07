@@ -20,11 +20,6 @@ class RegistrationForm(FlaskForm):
     submit = SubmitField(_l('Register'))
 
 
-    # making custom validators for username and email
-    # When you add any methods that match the pattern validate_<field_name> 
-    # WTForms takes those as custom validators and invokes them in addition to the stock validators
-    # next to that field names
-
     def validate_username(self, username):
         user = User.query.filter_by(username=username.data).first()
         if user is not None:
